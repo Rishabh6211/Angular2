@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-
-  constructor() { }
+public loading : boolean = false;
+  constructor() { this.loading = true;}
 
   ngOnInit() {
+  	setTimeout(()=>{    
+		    this.loading = false;
+			console.log('loaderStopped');
+		},2000);
   }
 
 }
