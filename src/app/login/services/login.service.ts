@@ -15,7 +15,7 @@ export class LoginService {
   		"username" : username,
   		"password" : password
   	}
-  	return this._http.post('../../src/assets/data/user.json', body).map((res:Response) => res.json())
+  	return this._http.get('http://localhost:4200/assets/data/user.json', body).map((res:Response) => res.json())
   }
 
 }

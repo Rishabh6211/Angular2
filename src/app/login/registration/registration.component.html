@@ -1,5 +1,7 @@
 <app-loader [loading]="loading"></app-loader>
 <main>
+ <div class="section"></div>
+  <div class="section"></div>
   <div class="container-fluid"> 
    
      <!-- loginbox-->
@@ -17,22 +19,32 @@
 		<!--Header-->
 				
 			<div class="card-block">
-
+				<form #registartionForm="ngForm" (onSubmit)=register()>
 				<div class="row">
 			   
 				   <div class="col-md-6">
 					<div class="md-form has-required">
 						<i class="fa fa-user prefix"></i>
-						<input type="text" id="firstname" class="form-control">
-						<label for="firstname">First Name</label>
+						<input type="text" id="firstname" name="firstname" #firstname="ngModel"  [(ngModel)]="user.firstname" class="form-control" required>
+						<label for="firstname" >First Name</label>
+						<div class="error-block">
+                            <small *ngIf="firstname.errors?.required && firstname.touched" class="text-danger">
+                                first name is required
+                            </small>
+                        </div>
 					</div>
 					</div>
                      
                     <div class="col-md-6">
 					<div class="md-form has-required">
 						<i class="fa fa-user prefix"></i>
-						<input type="text" id="lastname" class="form-control">
+						<input type="text" id="lastname" name="lastname" #lastname="ngModel"  [(ngModel)]="user.lastname" class="form-control" required>
 						<label for="lastname">Last Name</label>
+						<div class="error-block">
+                            <small *ngIf="lastname.errors?.required && lastname.touched" class="text-danger">
+                                last name is required
+                            </small>
+                        </div>
 					</div>
 					</div>
 					
@@ -42,16 +54,33 @@
 				   <div class="col-md-6">
 					<div class="md-form has-required">
 						<i class="fa fa-envelope prefix"></i>
-						<input type="text" id="email" class="form-control">
 						<label for="email">Email</label>
+						 <input type="email" name="uEmail" id="uEmail" #uEmail="ngModel" [(ngModel)]="user.email" class="form-control" (keydown.space)="$event.preventDefault()" onPaste="return false" onDrag="return false" onDrop="return false" email required />
+                            <div class="error-block">
+                                <small *ngIf="uEmail.errors?.required && uEmail.touched" class="text-danger">
+                                    email is required
+                                </small>
+                                <small *ngIf="uEmail.errors?.email && uEmail.touched" class="text-danger">
+                                    email is not valid
+                                </small>
+                            </div>
 					</div>
 					</div>
                      
                     <div class="col-md-6">
 					<div class="md-form has-required">
 						<i class="fa fa-phone prefix"></i>
-						<input type="text" id="mobile" class="form-control">
 						<label for="mobile">Mobile</label>
+						<input type="text" id="mobile" name="mobile" minlength="10" maxlength="10"
+						pattern="[0-9]*" #mobile="ngModel" [(ngModel)]="user.mobile" class="form-control" required>
+						<div class="error-block">
+                            <small *ngIf="mobile.errors?.required && mobile.touched" class="text-danger">
+                               mobile number is required
+                            </small>
+                            <small *ngIf="(mobile.errors?.pattern || mobile.errors?.minlength) && mobile.touched" class="text-danger">
+                                enter valid mobile number
+                            </small>
+                        </div>
 					</div>
 					</div>
 				</div>
@@ -61,60 +90,41 @@
 				   <div class="col-md-6">
 					<div class="md-form has-required">
 						<i class="fa fa-lock prefix"></i>
-						<input type="password" id="password" class="form-control">
 						<label for="password">Password</label>
+						<input type="password" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" minlength="8" maxlength="20" class="form-control" required>
+						<div class="error-block">
+                            <small *ngIf="password.errors?.required && password.touched" class="text-danger">
+                              password is required
+                            </small>
+                            <small *ngIf=" password.errors?.minlength && password.touched" class="text-danger">
+                                password is too small
+                            </small>
+                             <small *ngIf=" password.errors?.maxlength && password.touched" class="text-danger">
+                                password is too large
+                            </small>
+                        </div>
 					</div>
 				   </div>
                      
                    <div class="col-md-6">
 					<div class="md-form has-required">
 						<i class="fa fa-lock prefix"></i>
-						<input type="password" id="confirmpassword" class="form-control">
 						<label for="confirmpassword">Confirm Password*</label>
+						<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" #confirmPassword="ngModel" [(ngModel)]="user.confirmPassword" required />
+                        <div class="error-block">
+                            <small *ngIf="confirmPassword.errors?.required && confirmPassword.touched" class="text-danger">
+                                confirm password is required
+                            </small>
+                           <!--  <small *ngIf="(confirmPassword.errors?.equalTo && confirmPassword.touched)" class="text-danger">
+                                password mismatch
+                            </small> -->
+                        </div>
 					</div>
 				   </div>
 					
 				</div>
 				
-				<div class="row">
-			    
-				    <div class="col-md-6">
-						<div class="md-form">
-							<i class="fa fa-building prefix"></i>
-							<input type="text" id="city" class="form-control">
-							<label for="city">City/Village</label>
-						</div>
-					</div>
-                     
-					 <div class="col-md-6">
-						<div class="md-form">
-							<i class="fa fa-map-marker prefix"></i>
-							<input type="text" id="city" class="form-control">
-							<label for="city">State</label>
-						</div>
-					</div>
-					
-				</div>
 				
-				<div class="row">
-				  
-                   <div class="col-md-6">
-						<div class="md-form">
-							<i class="fa fa-map-marker prefix"></i>
-							<input type="text" id="city" class="form-control">
-							<label for="district">district</label>
-						</div>
-					</div>
-                     
-                    <div class="col-md-6">
-						<div class="md-form">
-							<i class="fa fa-building prefix"></i>
-							<input type="text" id="pincode" class="form-control">
-							<label for="pincode">Pin Code</label>
-						</div>
-					</div>
-					
-				</div>
 				
 				
                <!--  <fieldset class="form-group my-2">
@@ -123,9 +133,9 @@
                 </fieldset> -->
 				
 				<div class="text-center">
-					<button class="waves-effect waves-light btn">Register</button>
+					<button class="waves-effect waves-light btn" [disabled]="!registartionForm.valid">Register</button>
 				</div>
-				  
+				</form>  
 			</div>
 
 		</div>
