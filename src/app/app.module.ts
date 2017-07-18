@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { LoginComponent } from './login/login/login.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { RegistrationComponent } from './login/registration/registration.component';
-
+import { FormsModule }   from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,8 @@ import { RegistrationComponent } from './login/registration/registration.compone
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

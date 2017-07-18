@@ -21,22 +21,38 @@
       <div class="card-block">
 
         <!--Body-->
+        <form role="form" #loginForm="ngForm" (ngSubmit)="login()">
         <div class="md-form has-required">
           <i class="fa fa-envelope prefix"></i>
-          <input type="text" id="form2" class="form-control">
-          <label for="form2">Email & Phone</label>
+           <label for="form2" [ngClass]="{'active': hasUser}">Email & Phone</label>
+          <input type="email" id="form2" name="username" class="form-control" 
+           #username="ngModel" [(ngModel)]="user.email" email required>
+         
+           <div class="error-block">
+              <small *ngIf="username.errors?.required && username.touched" class="text-danger">
+                  email is required
+              </small>
+              <small *ngIf="username.errors?.email && username.touched" class="text-danger">
+                  email is not valid
+              </small>
+          </div>
         </div>
 
         <div class="md-form has-required">
          <i class="fa fa-lock prefix"></i>
-          <input type="password" id="form4" class="form-control">
-          <label for="form4">Password</label>
+          <input type="password" id="form4" class="form-control" name="password"  #password="ngModel" [(ngModel)]="user.password" required>
+          <label for="form4" [ngClass]="{'active': hasUser}">Password</label>
+          <div class="error-block">
+            <small *ngIf="password.errors?.required && password.touched" class="text-danger">
+                password is required
+            </small>
+          </div>
         </div>
 
         <div class="row">
           
           <div class="col-md-6">
-          <button class="waves-effect waves-light btn">Login</button>
+          <button  class="waves-effect waves-light btn" [disabled]="!loginForm.valid">Login</button>
           </div>
           
           <div class="col-md-6">
@@ -44,6 +60,7 @@
           </div>
           
         </div>
+        </form>
         
       </div>
 
