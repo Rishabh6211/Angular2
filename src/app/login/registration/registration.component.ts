@@ -8,7 +8,14 @@ import { LoginService } from '../services/login.service';
 })
 export class RegistrationComponent implements OnInit {
 public loading : boolean = false;
-public user:any = {};
+public user:any = {
+                  firstname:"",
+                  lastname:"",
+                  email:"",
+                  mobile:"",
+                  password:"",
+                  confirmPassword:""
+};
   constructor(private _loginService : LoginService) { this.loading = true;}
 
   ngOnInit() {
@@ -20,7 +27,7 @@ public user:any = {};
  
  register():void{
   this.loading = true;
-  this._loginService.login(this.user).subscribe(res =>{
+  this._loginService.postUser(this.user).subscribe(res =>{
    this.loading = false;
    console.log(res);
    })
