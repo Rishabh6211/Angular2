@@ -9,19 +9,31 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { RegistrationComponent } from './login/registration/registration.component';
 import { FormsModule }   from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {MenuItem} from 'primeng/api'; 
+import { DataTableModule } from "ng2-data-table";
+import { CenterComponent } from './center/center.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { StringFilterPipe }    from './pagination/filter';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LoaderComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    CenterComponent,
+    PaginationComponent,
+    StringFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    DataTableModule,
+    NgxPaginationModule
   ],
   providers: [ {
             provide: LocationStrategy,
